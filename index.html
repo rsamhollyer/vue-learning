@@ -2,27 +2,32 @@
 <html>
   <head>
     <title>Vue 3 Absolute Basics</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="style.css" />
     <script src="https://unpkg.com/vue@3"></script>
   </head>
+
   <body>
     <div id="app">
-      <div>
-        <input type="text" v-model="greeting" />
-      </div>
-      <p>{{ greeting }} ({{ greeting.length }})</p>
+      <!-- <button v-bind:class="buttonClasses">Click Me</button> -->
+      <!-- <button :class="active ? 'text-green' : 'text-red'" v-on:click="toggle"> -->
+      <button @click="toggle" :class="active ? 'text-green' : 'text-red'">
+        Click Me
+      </button>
     </div>
+
     <script>
       Vue.createApp({
         data() {
           return {
-            greeting: "Hello world!",
+            active: false,
           };
         },
 
-        mounted() {
-          setTimeout(() => {
-            this.greeting = "Changed!!";
-          }, 3000);
+        methods: {
+          toggle() {
+            this.active = !this.active;
+          },
         },
       }).mount("#app");
     </script>

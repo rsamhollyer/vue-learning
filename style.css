@@ -1,0 +1,17 @@
+:root {
+    --text-red: red;
+    --text-green: green;
+}
+
+body {
+    display: grid;
+    place-items: center;
+}
+
+.text-green {
+    color: var(--text-green);
+}
+
+.text-red {
+    color: var(--text-red);
+}
