@@ -10,49 +10,34 @@
 
   <body class="h-full grid place-items-center">
     <div id="app">
-      <section>
-        <h2 class="fond-bold mb-2">In Process</h2>
-        <ul>
-          <li v-for="assignment in inProgressAssignments" :key="assignment.id">
-            <label>{{assignment.name}}
-              <input type="checkbox" v-model="assignment.complete" />
-            </label>
-          </li>
-        </ul>
-      </section>
 
-      <section v-if="completedAssignments.length" class="mt-8">
-        <h2 class="fond-bold mb-2">Completed</h2>
-        <ul>
-          <li v-for="assignment in completedAssignments" :key="assignment.id">
-            <label>{{assignment.name}}
-              <input type="checkbox" v-model="assignment.complete" />
-            </label>
-          </li>
-        </ul>
-      </section>
+      <app-button>Submit</app-button>
+      <br />
+      <app-button>Click Me</app-button>
+
     </div>
 
     <script>
-      let app = {
-        data() {
-          return {
-            assignments: [
-              { id: 1, name: "Read", complete: false },
-              { id: 2, name: "Write", complete: false },
-              { id: 3, name: "Sleep", complete: false },
-            ],
-          };
-        },
-        computed: {
-          completedAssignments() {
-            return this.assignments.filter(a => a.complete);
+      const app = {
+        components: {
+          'app-button': {
+            template: `
+            <button 
+                class="bg-gray-200 hover:bg-gray-400 rounded-xl px-5 py-2 m-2 disabled:cursor-not-allowed" 
+                :disabled="processing">
+              <slot />
+              </button>
+            `,
+            data() {
+              return {
+                processing: false
+              }
+            },
           },
-          inProgressAssignments() {
-            return this.assignments.filter(a => !a.complete);
-          },
-        },
+
+        }
       };
+
       Vue.createApp(app).mount("#app");
     </script>
   </body>
